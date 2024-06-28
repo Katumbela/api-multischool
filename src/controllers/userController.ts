@@ -17,7 +17,7 @@ export const getUserById = async (req: Request, res: Response) => {
         const [rows] = await connection.query('SELECT * FROM users WHERE id = ?', [id]);
         res.json(rows);
     } catch (error) {
-        res.status(500).send('Erro ao buscar usuário');
+        res.status(500).json({ message: 'Erro ao buscar usuários' });
     }
 };
 
@@ -27,7 +27,7 @@ export const createUser = async (req: Request, res: Response) => {
         const [result] = await connection.query('INSERT INTO users SET ?', [newUser]);
         res.json({ id: (result as any).insertId, ...newUser });
     } catch (error) {
-        res.status(500).send('Erro ao criar usuário');
+        res.status(500).json({ message: 'Erro ao criar usuário' });
     }
 };
 
@@ -36,9 +36,9 @@ export const updateUser = async (req: Request, res: Response) => {
     const updatedUser: User = req.body;
     try {
         await connection.query('UPDATE users SET ? WHERE id = ?', [updatedUser, id]);
-        res.send('Usuário atualizado com sucesso');
+        res.json({ message: 'Usuário atualizado com sucesso' });
     } catch (error) {
-        res.status(500).send('Erro ao atualizar usuário');
+        res.status(500).json({ message: 'Erro ao atualizar usuário' });
     }
 };
 
@@ -46,8 +46,8 @@ export const deleteUser = async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
         await connection.query('DELETE FROM users WHERE id = ?', [id]);
-        res.send('Usuário deletado com sucesso');
+        res.json({ message: 'Usuário deletado com sucesso' });
     } catch (error) {
-        res.status(500).send('Erro ao deletar usuário');
+        res.status(500).json({ message: 'Erro ao deletar usuário' });
     }
 };
