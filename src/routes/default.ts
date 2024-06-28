@@ -1,6 +1,9 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
+
 const router = Router();
 
-router.get('/', () => 'Bem vindo a Multischool API');
+router.get('/', (req: Request, res: Response) => {
+  res.json({ message: 'Bem vindo a Multischool API' });
+});
 
 export default router;
