@@ -16,9 +16,9 @@
   },
   "include": [
      
-    "controllers",
+    "src/controllers",
     "src/middleware",
-    "routes",
+    "src/routes",
     "src/validators"
   ],
   "exclude": [
