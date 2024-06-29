@@ -29,14 +29,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api', userRoutes);
 app.use('/auth', authRouter);
 
-// Swagger
-const specs = swaggerJsdoc(options);
-app.use('/', swaggerUi.serve, swaggerUi.setup(specs));
-
 // Test route
 app.get('/test', (req, res) => {
   res.send('Server is running');
 });
+
+// Swagger
+const specs = swaggerJsdoc(options);
+app.use('/', swaggerUi.serve, swaggerUi.setup(specs));
+
 
 // Sync database and start server
 db.sequelize.sync().then(() => {
