@@ -2,7 +2,7 @@
  * @swagger
  * tags:
  *   name: Users
- *   description: API para listar de usuários
+ *   description: API para gerenciamento de usuários
  */
 
 import { Router } from 'express';
@@ -26,7 +26,6 @@ const userRoutes = Router();
  *               items:
  *                 $ref: '#/components/schemas/User'
  */
+userRoutes.route('/users').get(getUsers);
 
-userRoutes.route('/users')
-  .get(getUsers)
 export default userRoutes;
