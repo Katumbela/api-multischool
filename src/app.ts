@@ -5,6 +5,8 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import db from './models';
 import authRouter from './routes/auth.router';
+import morgan from 'morgan';
+
 
 const options = {
   definition: {
@@ -20,11 +22,11 @@ const options = {
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Body parsing Middleware 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(morgan('combined')); // Adiciona o middleware de logging
 // Rotas
 app.use('/api', userRoutes);
 app.use('/auth', authRouter);
