@@ -6,8 +6,22 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "paths": {
+      "*": [
+        "node_modules/*"
+      ]
+    }
   },
-  "include": ["src/**/*", "controllers", "middleware", "routes", "validators"],
-  "exclude": ["node_modules"]
+  "include": [
+     
+    "controllers",
+    "src/middleware",
+    "routes",
+    "src/validators"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

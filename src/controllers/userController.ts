@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import User from '../src/models/user'; // Importe seu modelo Sequelize User aqui
+import User from '../models/user'; // Importe seu modelo Sequelize User aqui
 
 const secretKey = 'multischool_app';
 

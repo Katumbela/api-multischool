@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node dist/app.js",
     "build": "tsc",
-    "dev": "ts-node src/app.ts"
+    "dev": "ts-node app.ts"
   },
   "keywords": [],
   "author": "",
@@ -23,8 +23,6 @@
     "jsonwebtoken": "^9.0.2",
     "mysql": "^2.18.1",
     "mysql2": "^3.10.1",
-    "sequelize": "^6.37.3",
-    "sequelize-cli": "^6.6.2",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "winston": "^3.13.0"
