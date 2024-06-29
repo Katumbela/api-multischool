@@ -1,4 +1,6 @@
-{
+require('dotenv').config();
+
+module.exports = {
   "development": {
     "username": "sql8716902",
     "password": "zIApsI1ZiE",

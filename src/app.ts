@@ -2,9 +2,8 @@ import express from 'express';
 import userRoutes from './routes/userRoutes'
 import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
-import swaggerJsdoc from 'swagger-jsdoc';
-import { Request, Response, NextFunction } from 'express';
-
+import swaggerJsdoc from 'swagger-jsdoc'; 
+import db from './models'
 const options = {
   definition: {
     openapi: '3.0.0',
@@ -34,19 +33,18 @@ const specs = swaggerJsdoc(options);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
-
-app.get('/', async(req: Request, res: Response): Promise<Response> => {
-    return res.status(200).send({ message: `Welcome to the cookbook API! \n Endpoints available at http://localhost:${port}/api/v1` })
+/*
+app.get('/', (req, res) => {
+  db.User.findAll({
+      include: {
+          model: db.Project
+      }
+  }).then((result: object) => res.json(result)).catch((err: object) => console.error(err));
 })
+*/
 
-try {
-    app.listen(port, () => {
-        console.log(`Server running on http://localhost:${port}`)
-    })
-} catch (error) {
-    console.log(`Error occurred: ${error.message}`)
-}
+db.sequelize.sync().then(() => {
+  app.listen(port, () => {
+      console.log(`App listening on port ${port}`)
+  })
+})

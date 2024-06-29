@@ -4,8 +4,11 @@
   "main": "dist/app.js",
   "scripts": {
     "start": "node dist/app.js",
+    "migrate:up": "npx sequelize-cli db:migrate",
+    "migrate:undo": "npx sequelize-cli db:migrate:undo",
     "build": "tsc",
-    "dev": "ts-node app.ts"
+    "generate:controller": "node generate-controller.js",
+    "dev": "ts-node src/app.ts"
   },
   "keywords": [],
   "author": "",
@@ -23,8 +26,10 @@
     "jsonwebtoken": "^9.0.2",
     "mysql": "^2.18.1",
     "mysql2": "^3.10.1",
+    "sequelize": "^6.37.3",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
+    "tedious": "^18.2.1",
     "winston": "^3.13.0"
   },
   "devDependencies": {
