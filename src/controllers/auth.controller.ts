@@ -1,65 +1,63 @@
-const pool = require("../database/index")
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+import { Request, Response } from 'express';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import db from '../models';
+
+const { User } = db;
 
 const authController = {
-    register: async (req, res) => {
+    register: async (req: Request, res: Response): Promise<Response> => {
         try {
-            const { email, password, name } = req.body
-            const [user, ] = await pool.query("select * from users where email = ?", [email])
-            if (user[0]) return res.json({ error: "Email already exists!" })
-            
+            const { email, password, name } = req.body;
 
-            const hash = await bcrypt.hash(password, 10)
+            const user = await User.findOne({ where: { email } });
+            if (user) return res.json({ error: "Email already exists!" });
 
-            const sql = "insert into users (email, password, name) values (?, ?, ?)"
-            const [rows, fields] = await pool.query(sql, [email, hash, name])
+            const hash = await bcrypt.hash(password, 10);
 
-            if (rows.affectedRows) {
-                return res.json({ message: "Ok" })
+            const newUser = await User.create({ email, password: hash, name });
+
+            if (newUser) {
+                return res.json({ message: "Ok" });
             } else {
-                return res.json({ error: "Error" })
+                return res.json({ error: "Error" });
             }
-            
-        } catch (error) {
-            console.log(error)
-            res.json({
+        } catch (error: any) {
+            console.log(error);
+            return res.json({
                 error: error.message
-            })
+            });
         }
     },
-    login: async (req, res) => {
+    login: async (req: Request, res: Response): Promise<Response> => {
         try {
-            const { email, password } = req.body
-            const [user, ] = await pool.query("select * from users where email = ?", [email])
-            if (!user[0]) return res.json({ error: "Invalid email!" })
-            
-            const { password: hash, id, name } = user[0]
+            const { email, password } = req.body;
 
-            const check = await bcrypt.compare(password, hash)
+            const user = await User.findOne({ where: { email } });
+            if (!user) return res.json({ error: "Invalid email!" });
+
+            const check = await bcrypt.compare(password, user.password);
 
             if (check) {
-                const accessToken = jwt.sign({ userId: id }, '3812932sjad34&*@', { expiresIn: '1h' });
-                return res.json({ 
+                const accessToken = jwt.sign({ userId: user.id }, '3812932sjad34&*@', { expiresIn: '1h' });
+                return res.json({
                     accessToken,
-                    data: { 
-                        userId: id,
-                        name,
-                        email
+                    data: {
+                        userId: user.id,
+                        name: user.name,
+                        email: user.email
                     }
-                 })
-
+                });
             }
 
-            return res.json({ error: "Wrong password!" })
-            
-        } catch (error) {
-            console.log(error)
-            res.json({
+            return res.json({ error: "Wrong password!" });
+        } catch (error: any) {
+            console.log(error);
+            return res.json({
                 error: error.message
-            })
+            });
         }
     },
-}
+};
 
-module.exports = authController
+export default authController;
