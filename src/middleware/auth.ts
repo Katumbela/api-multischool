@@ -3,14 +3,20 @@ import jwt from 'jsonwebtoken';
 
 const secretKey = 'your_secret_key';
 
+interface JwtPayload {
+  userId: string;
+  email: string;
+}
+
 export const authenticateJWT = (req: Request, res: Response, next: NextFunction) => {
   const token = req.header('Authorization')?.split(' ')[1];
   if (token) {
-    jwt.verify(token, secretKey, (err, user: any) => {
+    jwt.verify(token, secretKey, (err, user) => {
       if (err) {
         return res.sendStatus(403);
       }
-      req.user = user;
+      // Use tipo de asserção para evitar o erro de tipo
+      (req as any).user = user as JwtPayload;
       next();
     });
   } else {
