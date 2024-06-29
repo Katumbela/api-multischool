@@ -10,19 +10,17 @@ const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../../config/database.js')[env];
 const db: any = {};
- 
+
 const sequelizeConfig = config[env];
 
 const sequelize = new Sequelize(
-  sequelizeConfig.database,
-  sequelizeConfig.username,
-  sequelizeConfig.password,
+  "sql8716902", "sql8716902", "zIApsI1ZiE",
   {
-    host: sequelizeConfig.host,
-    dialect: sequelizeConfig.dialect,
+    host: "sql8.freesqldatabase.com",
+    dialect: 'mysql',
   }
 );
- 
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
