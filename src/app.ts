@@ -2,7 +2,7 @@ import express from 'express';
 import userRoutes from './routes/userRoutes'
 import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
-import swaggerJsdoc from 'swagger-jsdoc'; 
+import swaggerJsdoc from 'swagger-jsdoc';
 import db from './models'
 const options = {
   definition: {
@@ -43,8 +43,8 @@ app.get('/', (req, res) => {
 })
 */
 
-db.sequelize.sync().then(() => {
-  app.listen(port, () => {
-      console.log(`App listening on port ${port}`)
-  })
+//db.sequelize.sync().then(() => {
+app.listen(port, () => {
+  console.log(`App listening on port ${port}`)
 })
+//})

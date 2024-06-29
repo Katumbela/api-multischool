@@ -4,12 +4,14 @@ import {
   Model, UUIDV4
 } from 'sequelize';
 
+
 interface UserAttributes {
   id: string;
   name: string;
   email: string;
   password: string;
 }
+
 
 module.exports = (sequelize: any, DataTypes: any) => {
   class User extends Model<UserAttributes>
@@ -32,6 +34,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
       }
     */
   };
+
+  
   User.init({
     id: {
       type: DataTypes.UUID,
