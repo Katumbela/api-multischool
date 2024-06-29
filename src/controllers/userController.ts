@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import db from '../models'; // Importe seus modelos
 
-const { User } = db; // Desestruturação para obter o modelo User
+
+const { User } = db;
 
 export const getUsers = async (req: Request, res: Response) => {
   try {
