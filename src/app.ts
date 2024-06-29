@@ -4,6 +4,7 @@ import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import db from './models'
+import authRouter from './routes/auth.router';
 const options = {
   definition: {
     openapi: '3.0.0',
@@ -26,6 +27,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //app.use(defaultRoute);
 app.use('/api', userRoutes);
+app.use(authRouter);
 
 
 
