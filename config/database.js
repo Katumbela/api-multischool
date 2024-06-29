@@ -6,47 +6,20 @@ module.exports = {
     "password": "zIApsI1ZiE",
     "database": "sql8716902",
     "host": "sql8.freesqldatabase.com",
-    "dialect": "mysql",
-    "dialectModule": require('mysql2'),
-    "dialectOptions": {
-      "typeCast": function (field, next) {
-        if (field.type === 'TINY' && field.length === 1) {
-          return field.string() === '1'; // 1 for true, 0 for false
-        }
-        return next();
-      }
-    }
+    "dialect": "mysql"
   },
   "test": {
     "username": "sql8716902",
     "password": "zIApsI1ZiE",
     "database": "sql8716902",
     "host": "sql8.freesqldatabase.com",
-    "dialect": "mysql",
-    "dialectModule": require('mysql2'),
-    "dialectOptions": {
-      "typeCast": function (field, next) {
-        if (field.type === 'TINY' && field.length === 1) {
-          return field.string() === '1'; // 1 for true, 0 for false
-        }
-        return next();
-      }
-    }
+    "dialect": "mysql"
   },
   "production": {
     "username": "sql8716902",
     "password": "zIApsI1ZiE",
     "database": "sql8716902",
     "host": "sql8.freesqldatabase.com",
-    "dialect": "mysql",
-    "dialectModule": require('mysql2'),
-    "dialectOptions": {
-      "typeCast": function (field, next) {
-        if (field.type === 'TINY' && field.length === 1) {
-          return field.string() === '1'; // 1 for true, 0 for false
-        }
-        return next();
-      }
-    }
+    "dialect": "mysql"
   }
-};
+}
