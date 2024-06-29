@@ -3,24 +3,24 @@ dotenv.config();
 
 module.exports = {
   development: {
-    username: process.env.DB_USERNAME || '',
-    password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_NAME || '',
-    host: process.env.DB_HOST || '',
+    username: "sql8716902",
+    password: "zIApsI1ZiE",
+    database: "sql8716902",
+    host: "sql8.freesqldatabase.com",
     dialect: 'mysql',
   },
   test: {
-    username: process.env.DB_USERNAME || '',
-    password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_NAME || '',
-    host: process.env.DB_HOST || '',
+    username: "sql8716902",
+    password: "zIApsI1ZiE",
+    database: "sql8716902",
+    host: "sql8.freesqldatabase.com",
     dialect: 'mysql',
   },
   production: {
-    username: process.env.DB_USERNAME || '',
-    password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_NAME || '',
-    host: process.env.DB_HOST || '',
+    username: "sql8716902",
+    password: "zIApsI1ZiE",
+    database: "sql8716902",
+    host: "sql8.freesqldatabase.com",
     dialect: 'mysql',
   },
 };

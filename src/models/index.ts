@@ -5,13 +5,13 @@ import { UserFactory } from "./user";
 
 const fs = require('fs');
 const path = require('path');
-const Sequelize = require('sequelize'); 
+const Sequelize = require('sequelize');
+const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../../config/database.js')[env];
-const db: any = {}; 
+const db: any = {};
+ 
 const sequelizeConfig = config[env];
-
-console.log('Sequelize Config:', sequelizeConfig);  // Adicione este log para depuração
 
 const sequelize = new Sequelize(
   sequelizeConfig.database,
@@ -22,9 +22,11 @@ const sequelize = new Sequelize(
     dialect: sequelizeConfig.dialect,
   }
 );
-
+ 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+// Inicialize os modelos
 db.User = UserFactory(sequelize, DataTypes);
 
 export default db;
