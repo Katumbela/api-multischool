@@ -1,10 +1,11 @@
 import express from 'express';
-import userRoutes from './routes/userRoutes'
+import userRoutes from './routes/userRoutes';
 import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
-import db from './models'
+import db from './models';
 import authRouter from './routes/auth.router';
+
 const options = {
   definition: {
     openapi: '3.0.0',
@@ -13,40 +14,35 @@ const options = {
       version: '1.0.0',
     },
   },
-  apis: ['./routes/*.ts'], // Caminho para os arquivos de rotas
+  apis: ['./routes/*.ts'],
 };
 
-
 const app = express();
-const port = 3000;
-
+const port = process.env.PORT || 3000;
 
 // Body parsing Middleware 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-//app.use(defaultRoute);
+
+// Rotas
 app.use('/api', userRoutes);
-app.use(authRouter);
+app.use('/auth', authRouter);
 
-
-
+// Swagger
 const specs = swaggerJsdoc(options);
 app.use('/', swaggerUi.serve, swaggerUi.setup(specs));
 
+// Test route
+app.get('/test', (req, res) => {
+  res.send('Server is running');
+});
 
-/*
-app.get('/', (req, res) => {
-  db.User.findAll({
-      include: {
-          model: db.Project
-      }
-  }).then((result: object) => res.json(result)).catch((err: object) => console.error(err));
-})
-*/
-
+// Sync database and start server
 db.sequelize.sync().then(() => {
-app.listen(port, () => {
-  console.log(`App listening on port ${port}`)
-})
-})
+  app.listen(port, () => {
+    console.log(`App listening on port ${port}`);
+  });
+}).catch((err: any) => {
+  console.error('Unable to connect to the database:', err);
+});
