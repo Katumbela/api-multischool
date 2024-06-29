@@ -1,9 +1,9 @@
 import { Router, Request, Response } from 'express';
 
-const router = Router();
+const defaultRoute = Router();
 
-router.get('/', (req: Request, res: Response) => {
+defaultRoute.get('/', (req: Request, res: Response) => {
   res.json({ message: 'Bem vindo a Multischool API' });
 });
 
-export default router;
+export default defaultRoute;
