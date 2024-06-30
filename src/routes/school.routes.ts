@@ -3,8 +3,7 @@ import { Router } from 'express';
 import { getAllSchools, getSchoolById, createSchool, updateSchool, deleteSchool } from '../controllers/schools.controller';
 import { authMiddleware } from '../middleware/authMiddleware';
 
-const schoolRouter = Router();
-schoolRouter.use(authMiddleware);
+const schoolRouter = Router(); 
 schoolRouter.get('/schools', getAllSchools)
     .post('/schools', createSchool);
 

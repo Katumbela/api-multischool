@@ -1,6 +1,6 @@
 import express from 'express';
 import userRoutes from './routes/studentRoutes';
-import cors from 'cors'; 
+import cors from 'cors';
 import bodyParser from 'body-parser';
 import db from './models';
 import authRouter from './routes/auth.router';

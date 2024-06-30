@@ -6,7 +6,6 @@ const studentRouter = Router();
 
 studentRouter.post('/students', createStudent);
 
-studentRouter.use(authMiddleware);
 
 studentRouter.get('/students', getAllStudents);
 studentRouter.get('/students/:id', getStudentById);

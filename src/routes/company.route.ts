@@ -3,8 +3,7 @@ import { getAllCompanies, getCompanyById, createCompany, updateCompany, deleteCo
 import { Router } from 'express';
 
 const companyRoutes = Router();
-
-companyRoutes.use(authMiddleware);
+ 
 companyRoutes.get('/companies', getAllCompanies);
 companyRoutes.get('/companies/:id', getCompanyById);
 companyRoutes.post('/companies', createCompany);
