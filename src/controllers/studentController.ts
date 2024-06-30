@@ -12,11 +12,12 @@ export const getAllStudents = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Failed to fetch students' });
   }
 };
-
  
 export const getStudentById = async (req: Request, res: Response) => {
   try {
-    const student = await Student.findByPk(req.params.id);
+    const student = await Student.findByPk(req.params.id, {
+      attributes: { exclude: ['password'] } // Exclui o campo 'password' da consulta
+    });
     if (student) {
       res.status(200).json({ data: student });
     } else {
@@ -27,7 +28,8 @@ export const getStudentById = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Failed to fetch student' });
   }
 };
- 
+
+
 export const createStudent = async (req: Request, res: Response) => {
   try {
     const student = await Student.create(req.body);
