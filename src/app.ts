@@ -28,7 +28,7 @@ app.get('/', listRoutes(app));
 app.use('/api', studentRouter);
 app.use('/api', schoolRouter);
 app.use('/api', companyRoutes);
-app.use('/auth', authRouter);
+app.use('/api', authRouter);
 
 // Test route
 app.get('/test', (req, res) => {

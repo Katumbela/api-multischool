@@ -1,6 +1,6 @@
 'use strict';
 
-const { v4: uuidv4 } = require('uuid');
+const bcrypt = require('bcryptjs');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -9,34 +9,37 @@ module.exports = {
       {
         adhesionNumber: '123456',
         registrationNumber: '20230001',
-        studentName: 'John Doe',
+        studentName: 'João Silva',
         class: '10A',
-        shift: 'Morning',
+        shift: 'Manhã',
         phoneNumber: '1234567890',
-        course: 'Science',
+        course: 'Ciências',
         identificationNumber: 'ABC123456',
         registrationYear: 2023,
-        school: 'Katombela School',
+        school: 'Escola Katombela',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         adhesionNumber: '654321',
         registrationNumber: '20230002',
-        studentName: 'Jane Doe',
+        studentName: 'Maria Oliveira',
         class: '10B',
-        shift: 'Afternoon',
+        shift: 'Tarde',
         phoneNumber: '0987654321',
-        course: 'Arts',
+        course: 'Artes',
         identificationNumber: 'XYZ654321',
         registrationYear: 2023,
-        school: 'Mario Kenzo School',
+        school: 'Escola Mário Kenzo',
         createdAt: new Date(),
         updatedAt: new Date()
       }
     ];
 
-    await queryInterface.bulkInsert('Students', students, {});
+    await queryInterface.bulkInsert('Students', students.map(student => ({
+      ...student,
+      password: bcrypt.hashSync('senha123', 10) // Adiciona a senha encriptada
+    })), {});
   },
 
   async down(queryInterface, Sequelize) {

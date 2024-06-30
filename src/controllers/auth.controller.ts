@@ -1,61 +1,41 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import db from '../models';
-
-const { User } = db;
+import { Student } from '../models/student'; // Verifique o caminho correto para o modelo Student
 
 const authController = {
-    register: async (req: Request, res: Response): Promise<Response> => {
-        try {
-            const { email, password, name } = req.body;
-
-            const user = await User.findOne({ where: { email } });
-            if (user) return res.json({ error: "Email already exists!" });
-
-            const hash = await bcrypt.hash(password, 10);
-
-            const newUser = await User.create({ email, password: hash, name });
-
-            if (newUser) {
-                return res.json({ message: "Ok" });
-            } else {
-                return res.json({ error: "Error" });
-            }
-        } catch (error: any) {
-            console.log(error);
-            return res.json({
-                error: error.message
-            });
-        }
-    },
     login: async (req: Request, res: Response): Promise<Response> => {
         try {
-            const { email, password } = req.body;
+            const { adhesionNumber, password } = req.body;
 
-            const user = await User.findOne({ where: { email } });
-            if (!user) return res.json({ error: "Invalid email!" });
-
-            const check = await bcrypt.compare(password, user.password);
-
-            if (check) {
-                const accessToken = jwt.sign({ userId: user.id }, '3812932sjad34&*@', { expiresIn: '1h' });
-                return res.json({
-                    accessToken,
-                    data: {
-                        userId: user.id,
-                        name: user.name,
-                        email: user.email
-                    }
-                });
+            // Verifica se o usuário existe no banco de dados pelo número de adesão
+            const user = await Student.findOne({ where: { adhesionNumber } });
+            if (!user) {
+                return res.status(404).json({ error: "User not found" });
             }
 
-            return res.json({ error: "Wrong password!" });
-        } catch (error: any) {
-            console.log(error);
-            return res.json({
-                error: error.message
+            // Compara a senha fornecida com a senha armazenada no banco de dados
+            const passwordMatch = await bcrypt.compare(password, user.password);
+            if (!passwordMatch) {
+                return res.status(401).json({ error: "Incorrect password" });
+            }
+
+            // Gera um token de acesso JWT válido por 1 hora
+            const accessToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET || 'default_secret', { expiresIn: '1h' });
+
+            // Retorna os dados do usuário e o token de acesso
+            return res.status(200).json({
+                accessToken,
+                data: {
+                    userId: user.id,
+                    studentName: user.studentName,
+                    adhesionNumber: user.adhesionNumber,
+                    // Adicione outros campos conforme necessário
+                }
             });
+        } catch (error: any) {
+            console.error(error);
+            return res.status(500).json({ error: "Internal server error" });
         }
     },
 };

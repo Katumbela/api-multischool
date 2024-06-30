@@ -12,6 +12,7 @@ interface StudentAttributes {
   identificationNumber: string;
   registrationYear: number;
   school: string;
+  password: string; // Adicionando a propriedade password
 }
 
 export class Student extends Model<StudentAttributes> implements StudentAttributes {
@@ -26,6 +27,7 @@ export class Student extends Model<StudentAttributes> implements StudentAttribut
   public identificationNumber!: string;
   public registrationYear!: number;
   public school!: string;
+  public password!: string; // Adicionando a propriedade password
 }
 
 export const StudentFactory = (sequelize: Sequelize, dataTypes: typeof DataTypes): typeof Student => {
@@ -79,9 +81,14 @@ export const StudentFactory = (sequelize: Sequelize, dataTypes: typeof DataTypes
       type: dataTypes.STRING,
       allowNull: false,
     },
+    password: {
+      type: dataTypes.STRING, // Definindo o tipo para string
+      allowNull: false,
+    },
   }, {
     sequelize,
     modelName: 'Student',
+     
   });
 
   return Student;
