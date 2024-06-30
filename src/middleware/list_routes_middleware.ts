@@ -13,7 +13,7 @@ export const listRoutes = (app: { _router: { stack: any[]; }; }) => (req: Reques
         const route = handler.route;
         if (route) {
           routes.push({
-            path: route.path,
+            path: '/api'+route.path,
             methods: Object.keys(route.methods).join(', ').toUpperCase()
           });
         }

@@ -3,6 +3,7 @@
 import { DataTypes } from "sequelize";
 import { StudentFactory } from "./student";
 import { SchoolFactory } from './schools';
+import { CompanyFactory } from "./companies";
 
 const fs = require('fs');
 const path = require('path');
@@ -28,5 +29,6 @@ db.Sequelize = Sequelize;
 // Inicialize os modelos
 db.Student = StudentFactory(sequelize, DataTypes);
 db.Schools = SchoolFactory(sequelize, DataTypes);
+db.Companies = CompanyFactory(sequelize, DataTypes);
 
 export default db;
