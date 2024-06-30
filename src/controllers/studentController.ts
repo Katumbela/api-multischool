@@ -36,9 +36,14 @@ export const createStudent = async (req: Request, res: Response) => {
     res.status(201).json({ data: student });
   } catch (error: any) {
     console.error(error);
-    res.status(500).json({ error: 'Failed to create student' + error.message });
+    if (error.name === 'SequelizeUniqueConstraintError') {
+      res.status(400).json({ error: 'Duplicate entry for registration number' });
+    } else {
+      res.status(500).json({ error: 'Failed to create student' });
+    }
   }
 };
+
 
 export const updateStudent = async (req: Request, res: Response) => {
   try {
