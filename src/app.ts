@@ -8,6 +8,7 @@ import db from './models';
 import authRouter from './routes/auth.router';
 import morgan from 'morgan';
 import schoolRouter from './routes/school.routes';
+import { listRoutes } from './middleware/list_routes_middleware';
 
 
 const app = express();
@@ -21,6 +22,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan('combined'));
 
 // Rotas
+
+// Middleware para listar todas as rotas
+app.get('/', listRoutes(app));
 app.use('/api', userRoutes);
 app.use('/api', schoolRouter);
 app.use('/auth', authRouter);
