@@ -6,7 +6,7 @@
  */
 
 import { Router } from 'express';
-import { getUsers } from '../controllers/userController';
+import { getUsers, createUser, getUserById, updateUser } from '../controllers/userController';
 
 const userRoutes = Router();
 
@@ -26,6 +26,14 @@ const userRoutes = Router();
  *               items:
  *                 $ref: '#/components/schemas/User'
  */
-userRoutes.route('/users').get(getUsers);
+userRoutes.route('/users')
+    .get(getUsers)
+    .post(createUser);
+
+userRoutes.route('/users/:id')
+    .get(getUserById)
+    .put(updateUser);
+
+
 
 export default userRoutes;

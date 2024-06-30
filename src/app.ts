@@ -37,8 +37,9 @@ app.get('/test', (req, res) => {
 });
 
 // Swagger
-const specs = swaggerJsdoc(options);
-app.use('/', swaggerUi.serve, swaggerUi.setup(specs));
+//const specs = swaggerJsdoc(options);
+//app.use('/', swaggerUi.serve, swaggerUi.setup(specs));
+
 
 
 // Sync database and start server
