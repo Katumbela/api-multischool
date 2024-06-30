@@ -1,8 +1,10 @@
+import { authMiddleware } from '../middleware/authMiddleware';
 import { getAllCompanies, getCompanyById, createCompany, updateCompany, deleteCompany } from '../controllers/copmpany.controller'; 
 import { Router } from 'express';
 
 const companyRoutes = Router();
 
+companyRoutes.use(authMiddleware);
 companyRoutes.get('/companies', getAllCompanies);
 companyRoutes.get('/companies/:id', getCompanyById);
 companyRoutes.post('/companies', createCompany);
