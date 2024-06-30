@@ -1,14 +1,13 @@
 import express from 'express';
-import userRoutes from './routes/userRoutes';
-import cors from 'cors';
-import swaggerUi from 'swagger-ui-express';
-import swaggerJsdoc from 'swagger-jsdoc';
+import userRoutes from './routes/studentRoutes';
+import cors from 'cors'; 
 import bodyParser from 'body-parser';
 import db from './models';
 import authRouter from './routes/auth.router';
 import morgan from 'morgan';
 import schoolRouter from './routes/school.routes';
 import { listRoutes } from './middleware/list_routes_middleware';
+import studentRouter from './routes/studentRoutes';
 
 
 const app = express();
@@ -25,7 +24,7 @@ app.use(morgan('combined'));
 
 // Middleware para listar todas as rotas
 app.get('/', listRoutes(app));
-app.use('/api', userRoutes);
+app.use('/api', studentRouter);
 app.use('/api', schoolRouter);
 app.use('/auth', authRouter);
 

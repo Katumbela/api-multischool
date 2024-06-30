@@ -1,38 +1,45 @@
 'use strict';
 
-const bcrypt = require('bcryptjs');
+const { v4: uuidv4 } = require('uuid');
 
+/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    const hashedPassword = await bcrypt.hash('senha123', 10); // Hash da senha 'senha123'
-
-    // Inserir usuários de exemplo
-    await queryInterface.bulkInsert('Users', [
+    const students = [
       {
-        id: '1e5c68b0-9e6e-4c2c-8c17-6c5682f489a7',
-        name: 'John Doe',
-        email: 'john.doe@example.com',
-        password: hashedPassword,
+        adhesionNumber: '123456',
+        registrationNumber: '20230001',
+        studentName: 'John Doe',
+        class: '10A',
+        shift: 'Morning',
+        phoneNumber: '1234567890',
+        course: 'Science',
+        identificationNumber: 'ABC123456',
+        registrationYear: 2023,
+        school: 'Katombela School',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        id: '31e7c7f4-51e7-45e6-b58f-1a0b1b15ac63',
-        name: 'Jane Doe',
-        email: 'jane.doe@example.com',
-        password: hashedPassword,
+        adhesionNumber: '654321',
+        registrationNumber: '20230002',
+        studentName: 'Jane Doe',
+        class: '10B',
+        shift: 'Afternoon',
+        phoneNumber: '0987654321',
+        course: 'Arts',
+        identificationNumber: 'XYZ654321',
+        registrationYear: 2023,
+        school: 'Mario Kenzo School',
         createdAt: new Date(),
         updatedAt: new Date()
       }
-    ], {});
+    ];
+
+    await queryInterface.bulkInsert('Students', students, {});
   },
 
   async down(queryInterface, Sequelize) {
-    // Remover todos os usuários inseridos pelo seed
-    await queryInterface.bulkDelete('Users', null, {});
+    await queryInterface.bulkDelete('Students', null, {});
   }
 };
-
-
-
-

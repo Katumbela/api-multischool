@@ -1,7 +1,7 @@
 'use strict';
 
 import { DataTypes } from "sequelize";
-import { UserFactory } from "./user";
+import { UserFactory } from "./student";
 import { SchoolFactory } from './schools';
 
 const fs = require('fs');
