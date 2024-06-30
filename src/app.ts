@@ -25,10 +25,10 @@ app.use(morgan('combined'));
 
 // Middleware para listar todas as rotas
 app.get('/', listRoutes(app));
+app.use('/api', authRouter);
 app.use('/api', studentRouter);
 app.use('/api', schoolRouter);
 app.use('/api', companyRoutes);
-app.use('/api', authRouter);
 
 // Test route
 app.get('/test', (req, res) => {
