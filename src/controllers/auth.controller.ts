@@ -29,7 +29,7 @@ const authController = {
                 data: {
                     userId: user.id,
                     studentName: user.studentName,
-                    adhesionNumber: user.adhesionNumber,8
+                    adhesionNumber: user.adhesionNumber,
                 }
             });
         } catch (error: any) {
