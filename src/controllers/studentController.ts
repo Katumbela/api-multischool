@@ -1,11 +1,10 @@
 import { Request, Response } from 'express';
 import { Student } from '../models/student';
- 
-// Retorna todos os estudantes
+  
 export const getAllStudents = async (req: Request, res: Response) => {
   try {
     const students = await Student.findAll({
-      attributes: { exclude: ['password'] } // Exclui o campo 'password' da consulta
+      attributes: { exclude: ['password'] } 
     });
     res.status(200).json({ data: students });
   } catch (error) {

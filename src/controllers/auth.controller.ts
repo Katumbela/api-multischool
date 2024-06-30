@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { Student } from '../models/student'; // Verifique o caminho correto para o modelo Student
+import { Student } from '../models/student'; 
 
 const authController = {
     login: async (req: Request, res: Response): Promise<Response> => {
@@ -20,8 +20,8 @@ const authController = {
                 return res.status(401).json({ error: "Incorrect password" });
             }
 
-            // Gera um token de acesso JWT válido por 1 hora
-            const accessToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET || 'default_secret', { expiresIn: '1h' });
+            // Gera um token de acesso JWT válido por 8 hora
+            const accessToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET || 'default_secret', { expiresIn: '8h' });
 
             // Retorna os dados do usuário e o token de acesso
             return res.status(200).json({
@@ -29,8 +29,7 @@ const authController = {
                 data: {
                     userId: user.id,
                     studentName: user.studentName,
-                    adhesionNumber: user.adhesionNumber,
-                    // Adicione outros campos conforme necessário
+                    adhesionNumber: user.adhesionNumber,8
                 }
             });
         } catch (error: any) {
