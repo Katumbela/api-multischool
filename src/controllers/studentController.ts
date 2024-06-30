@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
 import { Student } from '../models/student';
-  
+
 export const getAllStudents = async (req: Request, res: Response) => {
   try {
     const students = await Student.findAll({
-      attributes: { exclude: ['password'] } 
+      attributes: { exclude: ['password'] }
     });
     res.status(200).json({ data: students });
   } catch (error) {
@@ -12,7 +12,7 @@ export const getAllStudents = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Failed to fetch students' });
   }
 };
- 
+
 export const getStudentById = async (req: Request, res: Response) => {
   try {
     const student = await Student.findByPk(req.params.id, {
@@ -34,11 +34,11 @@ export const createStudent = async (req: Request, res: Response) => {
   try {
     const student = await Student.create(req.body);
     res.status(201).json({ data: student });
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
-    res.status(500).json({ error: 'Failed to create student' });
+    res.status(500).json({ error: 'Failed to create student' + error.message });
   }
-}; 
+};
 
 export const updateStudent = async (req: Request, res: Response) => {
   try {
@@ -56,7 +56,7 @@ export const updateStudent = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Failed to update student' });
   }
 };
- 
+
 export const deleteStudent = async (req: Request, res: Response) => {
   try {
     const deleted = await Student.destroy({
