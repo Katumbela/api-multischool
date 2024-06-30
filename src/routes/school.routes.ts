@@ -1,5 +1,6 @@
+
 import { Router } from 'express';
-import { getAllSchools, getSchoolById, createSchool, updateSchool, deleteSchool } from '../controllers/schoolController';
+import { getAllSchools, getSchoolById, createSchool, updateSchool, deleteSchool } from '../controllers/schools.controller';
 
 const schoolRouter = Router();
 
