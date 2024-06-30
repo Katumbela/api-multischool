@@ -1,10 +1,12 @@
 import { Request, Response } from 'express';
 import { Student } from '../models/student';
-
+ 
 // Retorna todos os estudantes
 export const getAllStudents = async (req: Request, res: Response) => {
   try {
-    const students = await Student.findAll();
+    const students = await Student.findAll({
+      attributes: { exclude: ['password'] } // Exclui o campo 'password' da consulta
+    });
     res.status(200).json({ data: students });
   } catch (error) {
     console.error(error);
@@ -12,7 +14,7 @@ export const getAllStudents = async (req: Request, res: Response) => {
   }
 };
 
-// Retorna um estudante pelo ID
+ 
 export const getStudentById = async (req: Request, res: Response) => {
   try {
     const student = await Student.findByPk(req.params.id);
@@ -26,8 +28,7 @@ export const getStudentById = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Failed to fetch student' });
   }
 };
-
-// Cria um novo estudante
+ 
 export const createStudent = async (req: Request, res: Response) => {
   try {
     const student = await Student.create(req.body);
@@ -36,9 +37,8 @@ export const createStudent = async (req: Request, res: Response) => {
     console.error(error);
     res.status(500).json({ error: 'Failed to create student' });
   }
-};
+}; 
 
-// Atualiza um estudante pelo ID
 export const updateStudent = async (req: Request, res: Response) => {
   try {
     const [updated] = await Student.update(req.body, {
@@ -55,8 +55,7 @@ export const updateStudent = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Failed to update student' });
   }
 };
-
-// Deleta um estudante pelo ID
+ 
 export const deleteStudent = async (req: Request, res: Response) => {
   try {
     const deleted = await Student.destroy({
