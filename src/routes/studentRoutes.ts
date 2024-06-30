@@ -8,6 +8,7 @@ studentRouter.post('/students', createStudent);
 
 
 studentRouter.get('/students', getAllStudents);
+studentRouter.post('/students', createStudent);
 studentRouter.get('/students/:id', getStudentById);
 studentRouter.put('/students/:id', updateStudent);
 studentRouter.delete('/students/:id', deleteStudent);
