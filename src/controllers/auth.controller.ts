@@ -35,7 +35,7 @@ const authController = {
             });
         } catch (error: any) {
             console.error(error);
-            return res.status(500).json({ error: "Internal server error" });
+            return res.status(500).json({ error: `Internal server error: ${error.message}` });
         }
     },
 };
