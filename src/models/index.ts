@@ -1,7 +1,7 @@
 'use strict';
 
 import { DataTypes } from "sequelize";
-import { UserFactory } from "./student";
+import { StudentFactory } from "./student";
 import { SchoolFactory } from './schools';
 
 const fs = require('fs');
@@ -26,7 +26,7 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 // Inicialize os modelos
-db.User = UserFactory(sequelize, DataTypes);
+db.Student = StudentFactory(sequelize, DataTypes);
 db.Schools = SchoolFactory(sequelize, DataTypes);
 
 export default db;
