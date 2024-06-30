@@ -8,6 +8,7 @@ import morgan from 'morgan';
 import schoolRouter from './routes/school.routes';
 import { listRoutes } from './middleware/list_routes_middleware';
 import studentRouter from './routes/studentRoutes';
+import companyRoutes from './routes/company.route';
 
 
 const app = express();
@@ -26,6 +27,7 @@ app.use(morgan('combined'));
 app.get('/', listRoutes(app));
 app.use('/api', studentRouter);
 app.use('/api', schoolRouter);
+app.use('/api', companyRoutes);
 app.use('/auth', authRouter);
 
 // Test route
