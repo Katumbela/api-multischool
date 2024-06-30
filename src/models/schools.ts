@@ -8,6 +8,8 @@ interface SchoolsAttributes {
   founded_year: number;
   school_email: string;
   province: string;
+  nif_number: string;
+  html_link: string;
   school_type: string;
 }
 
@@ -17,6 +19,8 @@ export class Schools extends Model<SchoolsAttributes> implements SchoolsAttribut
   public founder!: string;
   public founded_year!: number;
   public school_email!: string;
+  public html_link!: string;
+  public nif_number!: string;
   public province!: string;
   public school_type!: string;
 }
@@ -45,6 +49,14 @@ export const SchoolFactory = (sequelize: Sequelize, dataTypes: typeof DataTypes)
       allowNull: false,
     },
     school_type: {
+      type: dataTypes.STRING,
+      allowNull: false,
+    },
+    nif_number: {
+      type: dataTypes.STRING,
+      allowNull: false,
+    },
+    html_link: {
       type: dataTypes.STRING,
       allowNull: false,
     },

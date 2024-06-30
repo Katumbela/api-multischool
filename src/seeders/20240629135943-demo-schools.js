@@ -15,6 +15,8 @@ module.exports = {
         school_type: 'University',
         province: 'Luanda',
         founded_year: 2006,
+        html_link: 'https://api-multischool.up.railway.app/api/schools',
+        nif_number: '0062353BA0444',
         founder: 'Joao Katombela',
         createdAt: new Date(),
         updatedAt: new Date()
@@ -26,6 +28,8 @@ module.exports = {
         school_type: 'University',
         province: 'Luanda',
         founded_year: 2000,
+        html_link: 'https://api-multischool.up.railway.app/api/schools',
+        nif_number: '0682353LA044',
         founder: 'Mario Kenzo',
         createdAt: new Date(),
         updatedAt: new Date()

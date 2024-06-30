@@ -36,6 +36,14 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      nif_number: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      html_link: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
