@@ -3,50 +3,39 @@ import userRoutes from './routes/userRoutes';
 import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
+import bodyParser from 'body-parser';
 import db from './models';
 import authRouter from './routes/auth.router';
 import morgan from 'morgan';
+import schoolRouter from './routes/school.routes';
 
-
-const options = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'MultiSchool API Documentation',
-      version: '1.0.0',
-    },
-  },
-  apis: ['./routes/*.ts'],
-};
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(morgan('combined')); // Adiciona o middleware de logging
+app.use(morgan('combined'));
+
 // Rotas
 app.use('/api', userRoutes);
+app.use('/api', schoolRouter);
 app.use('/auth', authRouter);
 
 // Test route
 app.get('/test', (req, res) => {
-  res.send('Server is running');
+  res.send('Servidor rodando');
 });
-
-// Swagger
-//const specs = swaggerJsdoc(options);
-//app.use('/', swaggerUi.serve, swaggerUi.setup(specs));
-
 
 
 // Sync database and start server
 db.sequelize.sync().then(() => {
   app.listen(port, () => {
-    console.log(`App listening on port ${port}`);
+    console.log(`App rodando na port ${port}`);
   });
 }).catch((err: any) => {
-  console.error('Unable to connect to the database:', err);
+  console.error('Erro ao conectar com a DB:', err);
 });

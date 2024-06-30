@@ -2,6 +2,7 @@
 
 import { DataTypes } from "sequelize";
 import { UserFactory } from "./user";
+import { SchoolFactory } from './schools';
 
 const fs = require('fs');
 const path = require('path');
@@ -26,5 +27,6 @@ db.Sequelize = Sequelize;
 
 // Inicialize os modelos
 db.User = UserFactory(sequelize, DataTypes);
+db.Schools = SchoolFactory(sequelize, DataTypes);
 
 export default db;
